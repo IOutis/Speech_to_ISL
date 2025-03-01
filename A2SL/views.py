@@ -8,6 +8,7 @@ from nltk.stem import WordNetLemmatizer
 import nltk
 from django.contrib.staticfiles import finders
 from django.contrib.auth.decorators import login_required
+import requests
 
 def home_view(request):
 	return render(request,'home.html')
@@ -24,6 +25,21 @@ def contact_view(request):
 def animation_view(request):
 	if request.method == 'POST':
 		text = request.POST.get('sen')
+		url = "https://text-translator2.p.rapidapi.com/translate"
+		headers = {
+			"content-type": "application/x-www-form-urlencoded",
+			"X-RapidAPI-Key": "0f491a5108mshbe7b62a9976bafbp15461ejsn7894515d0926",
+			"X-RapidAPI-Host": "text-translator2.p.rapidapi.com",
+		}
+		data = {
+			"source_language": "auto",
+			"target_language": "en",
+			"text": text,
+		}
+		response = requests.post(url, data=data, headers=headers)
+		translation = response.json()
+		text = translation["data"]["translatedText"]
+		print("Translated text = ",text)
 		#tokenizing the sentence
 		text.lower()
 		#tokenizing the sentence
