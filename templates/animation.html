@@ -359,8 +359,11 @@
         Your browser does not support HTML5 video.
       </video>
       <div class="video-controls">
-        <button class="submit" onclick="playPause()">Play/Pause</button>
-      </div>
+		<button class="submit" onclick="playPause()">Play/Pause</button>
+		<button class="submit" onclick="increaseSpeed()">Speed +</button>
+		<button class="submit" onclick="decreaseSpeed()">Speed -</button>
+		<button class="submit" onclick="replay()">Replay</button>
+	  </div>
     </div>
   </div>
 
@@ -377,6 +380,30 @@
       }
       recognition.start();
     }
+	{% comment %} var video = document.getElementById("videoPlayer");
+
+		function playPause() {
+		if (video.paused) {
+			video.play();
+		} else {
+			video.pause();
+		}
+		}
+
+		function increaseSpeed() {
+		video.playbackRate += 0.25; // Increase speed by 0.25x
+		}
+
+		function decreaseSpeed() {
+		if (video.playbackRate > 0.5) {
+			video.playbackRate -= 0.25; // Decrease speed by 0.25x, minimum 0.5x
+		}
+		}
+
+		function replay() {
+		video.currentTime = 0; // Reset to the beginning
+		video.play();
+		} {% endcomment %}
     
     function play() {
       var videoSource = new Array();
